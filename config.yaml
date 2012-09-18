@@ -1,0 +1,5 @@
+name: shakespeare
+version: 1
+handle:
+- rewrite: if(!is_dir() && !is_file() && path ~ "^(.*)$") goto "index.php$1?%{QUERY_STRING}"
+- expire:  if( path ~ "static" ) time 3600000

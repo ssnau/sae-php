@@ -1,0 +1,34 @@
+<?php include(ROOT_DIR. 'template/header.php'); ?>
+<?php
+//定义导航栏内容
+$nav = array(
+	'图像数字签名' => array('/signature/compute'=>'生成图像签名',
+						"/signature/verify"=>'验证图像签名',
+						"/signature/mine"=>'已生成的签名'),
+	'密钥管理' => array('/key/mine' => '我的个人密钥',
+						'/key/collection' => '我收藏的公钥'),
+	'资料管理' => array('/personal/info'=>'个人信息',
+						'/personal/friends'=>'我关注的人',
+						'/personal/password'=>'修改密码'));
+?>
+	<div class="row">
+		<div class="span3">
+			 <div class="well sidebar-nav">
+				<ul class="nav nav-list">
+<?php
+//输出导航栏
+	foreach($nav as $header => $content) {
+		echo '<li class="nav-header">'.$header.'</li>';
+		foreach($content as $url => $name) {
+			if ($url == $_SERVER['REQUEST_URI']) {
+				echo '<li class="active" ><a href="'.$url.'">'.$name.'</a></li>';
+			} else {
+				echo '<li><a href="'.$url.'">'.$name.'</a></li>';
+			}
+		}
+	}
+?>
+				</ul>
+			</div><!--/.well -->
+		</div><!--/.span4 -->
+		<div class="span8">

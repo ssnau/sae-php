@@ -1,0 +1,35 @@
+1. js文件是如何存放的？
+	js文件分为三类：
+		1. 公共类，如jquery, main，直接放在js/目录下,无前缀
+		2. widgets, 如w-tablelist, w-tabstage, 放在widgets/目录下,前缀为w-
+		3. 页面类，仅和某页面相关的js文件，放在pages/目录下，前缀为p-
+
+2. php文件是如何存放的？
+	1. 抽象类或全局类，如App.php, pre_defined.php，后缀为Class或无后缀,存放在include目录下
+	2. lib类，实现某一功能的类，一般而言都是静态方法，如PyLib, ToolLib, 类名及文件名以Lib结尾,存放在lib目录下
+	3. entity类，实体类，均继承自EntityLib类，映射数据库的表结构，类名及文件名以Entity结尾,存放在entity目录下
+	4. action类，用于映射url请求，类名及文件名以Action结尾,存放在action目录下
+	5. 模板文件，${模板文件名} = "/template/" + ${类名without Action} + "/"+ ${action函数名}(如/template/signature/actCompute.php)
+
+3. css文件是如何存放的？
+	1. main.css所有页面共有，存放公共样式
+	2. widgets所有插件共有，存放所有插件的样式
+
+4. php变量命名约定是怎么样的？
+	1. 对于一切setVar('${a}', $var)而言，${a}必须是以page_为前缀，表示页面上的变量
+
+5. widgets是如何传递事件处理函数？
+	一般而言，对于一个特定的页面element的点击事件，如li，有如下约定。
+	1. 必须含有data-info属性， <li data-info='{info}'> MSTR </li>
+	2. 在widgets的构造函数中传入回调函数，如new Widgets('#widgets', { callback_func: fn }), callback_func根据不同插件命名不同(不同的原因在于，一个插件内部可能有好几种不同元素需要传递事件处理)
+	3. 在widgets内部对事件的响应方式是调用传入的回调函数，参数是data-info， 如ndLi.click(function(e){ config.callback_func(ndLi.attr('info')); }
+
+6. ajax是怎么约定的?
+	1. 
+
+7. 图片文件有什么存放规范？
+	1. 通用的图片文件存放于general/目录下，如网站logo, twitter图标，豆瓣图标等。
+	2. 插件相关的图片存放于widgets/${widgets-name}/目录下，注：${widgets-name}与js文件名一致，含有前缀w-
+	3. 页面相关的图片文件存放于pages/${action_name}/目录下,文件名以相应模板文件做为前缀，即若模板为content.php，图片文件为content-xxx.png
+
+8. 
